@@ -95,7 +95,14 @@ class UsuarioController extends Controller
             return response()->json(['errors'=>array(['code'=>404,'message'=>'No se encuentra un usuario con ese código.'])],404);
         }
 
-        return response()->json(['status'=>'ok','data'=>$usuario->get()],200);
+        $data = (object)[];
+        $data->usuario = $usuario;
+        $data->habilidades = $usuario->habilidades()->get();
+
+      //  return response()->json(['status'=>'ok','data'=>$data],200);
+
+
+        return response()->json(['status'=>'ok','data'=>$data],200);
     }
 
     /**
