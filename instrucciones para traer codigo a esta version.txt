@@ -1,0 +1,12 @@
+seguir esta web
+https://medium.com/@david.quezada.m/tutorial-api-restful-con-laravel-5-6-en-menos-de-1000-palabras-e14249fef9a9
+
+hacerlo poco a poco empezando por las migraciones
+las creas y le copias el contenido dentro
+despues los modelos
+y despues los contraladores
+ir haciendo consultas y pruebas con postman con cada uno de los objetos en cada paso
+el error en la ruta era que habia que poner la ruta completa del conroller por eso no lo encontraba
+la mejor forma de crear el proyecto ha sido laravel new tutoApiRest
+a partir de ahi y con el antivirus parado ha arrancado el servidor
+si no sacarlo del baul del antivirus
