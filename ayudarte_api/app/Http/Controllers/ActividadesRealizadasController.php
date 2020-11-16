@@ -7,6 +7,7 @@ class ActividadesRealizadasController extends Controller
 use Illuminate\Http\Request;
 
 namespace App\Http\Controllers\Api;
+use Illuminate\Support\Facades\Cache;
 
 class ActividadesRealizadasController extends Controller
 {
