@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Usuario;
+use Illuminate\Support\Facades\Cache;
 
 class UsuarioController extends Controller
 {
@@ -62,7 +63,6 @@ class UsuarioController extends Controller
         //Declaramos el nombre con el nombre enviado en el request
         //$usuario->descripcion = $request->descripcion;
         $usuario->nombre = $request->nombre;
-        $usuario->nombre = $request->nombre;
         $usuario->apellido1 = $request->apellido1;
         $usuario->apellido2 = $request->apellido2;
         $usuario->fechaNacimiento = $request->fechaNacimiento;
@@ -72,9 +72,11 @@ class UsuarioController extends Controller
         $usuario->administrador = $request->administrador;
         $usuario->email = $request->email;
         $usuario->password = $request->password;
+
         //Guardamos el cambio en nuestro modelo
 
         $usuario->save();
+        $usuario->createToken('usuario');
     }
 
     /**
@@ -98,6 +100,8 @@ class UsuarioController extends Controller
         $data = (object)[];
         $data->usuario = $usuario;
         $data->habilidades = $usuario->habilidades()->get();
+        $data->activiadesRealizadas = $usuario->actividadesRealizadas()->get();
+        $data->activiadesSolicitadas = $usuario->actividadesSolicitadas()->get();
 
       //  return response()->json(['status'=>'ok','data'=>$data],200);
 
@@ -127,9 +131,10 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        return "Se edita un usuarios.";
-
+        $usuario = new Usuario;
+        $usuario = Usuario::findOrFail($id);
+        $usuario->update($request->all());
+        return $usuario;
     }
 
     /**

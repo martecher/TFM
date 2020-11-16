@@ -55,7 +55,16 @@ class HabilidadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $habilidad = new Habilidad;
+        //Declaramos el nombre con el nombre enviado en el request
+        $habilidad->descripcion = $request->descripcion;
+        $habilidad->horasEstipuladas = $request->horasEstipuladas;
+        $habilidad->categoria_Habilidad_id = $request->categoria_Habilidad_id;
+
+        //Guardamos el cambio en nuestro modelo
+        $habilidad->save();
+
     }
 
     /**
@@ -79,7 +88,6 @@ class HabilidadController extends Controller
         $data = (object)[];
         $data->descripcion = $habilidad->descripcion;
         $data->horasEstipuladas = $habilidad->horasEstipuladas;
-        $data->categoria_Habilidad_id = $habilidad->categoria_Habilidad_id;
         $categoriaHabilidad = CategoriaHabilidad::find($habilidad->categoria_Habilidad_id);
         $data->categoria = $categoriaHabilidad;
         return response()->json(['status'=>'ok','data'=>$data],200);
@@ -94,7 +102,7 @@ class HabilidadController extends Controller
      */
     public function edit($id)
     {
-        //
+       $habilidad=Habilidad::find($id);
     }
 
     /**
@@ -106,7 +114,11 @@ class HabilidadController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $habilidad = new Habilidad;
+        $habilidad = Habilidad::findOrFail($id);
+        $habilidad->update($request->all());
+        return $habilidad;
     }
 
     /**
