@@ -29,7 +29,7 @@ class Habilidad extends Model
     {
         // 1 habilidad a un categoria.
         // $this hace referencia al objeto que tengamos en ese momento de habilidad.
-        return $this->belongsTo('App\CategoriaHabilidad');
+        return $this->belongsTo('App\Models\CategoriaHabilidad');
     }
     public function usuarios()
     {

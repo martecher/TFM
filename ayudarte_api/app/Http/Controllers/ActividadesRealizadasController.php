@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-class ActividadesRealizadasController extends Controller
-
 use Illuminate\Http\Request;
+use App\Models\ActividadesRealizadas;
+use App\Models\Usuario;
+use App\Models\Categoria;
 
-namespace App\Http\Controllers\Api;
 use Illuminate\Support\Facades\Cache;
 
 class ActividadesRealizadasController extends Controller
@@ -18,7 +18,20 @@ class ActividadesRealizadasController extends Controller
      */
     public function index()
     {
-        //
+    $actividadesRealizadas=Cache::remember('actividadesRealizadas',15/60,function()
+        {
+
+            // Este método paginate() está orientado a interfaces gráficas.
+            // Paginator tiene un método llamado render() que permite construir
+            // los enlaces a página siguiente, anterior, etc..
+            // Para la API RESTFUL usaremos un método más sencillo llamado simplePaginate() que
+            // aporta la misma funcionalidad
+            return ActividadesRealizadas::simplePaginate(10);  // Paginamos cada 10 elementos.
+
+        });
+        // Con la paginación lo haremos de la siguiente forma:
+        // Devolviendo también la URL a l
+        return response()->json(['status'=>'ok', 'siguiente'=>$actividadesRealizadas->nextPageUrl(),'anterior'=>$actividadesRealizadas->previousPageUrl(),'data'=>$actividadesRealizadas->items()],200);
     }
 
     /**
@@ -50,7 +63,23 @@ class ActividadesRealizadasController extends Controller
      */
     public function show($id)
     {
-        //
+       $actividad=ActividadesRealizadas::find($id);
+         if (! $actividad)
+        {
+            // Se devuelve un array errors con los errores encontrados y cabecera HTTP 404.
+            // En code podríamos indicar un código de error personalizado de nuestra aplicación si lo deseamos.
+            return response()->json(['errors'=>array(['code'=>404,'message'=>'No se encuentra una actividad con ese código.'])],404);
+        }
+
+        $data = (object)[];
+        $data->observacion = $actividad->observacion;
+        $data->horasReales = $actividad->horasReales;
+        $data->valoracion = $actividad->valoracion;
+        $data->usuarioSolicita = $actividad->usuarioSolicita()->get();
+        $data->usuarioRealizada = $actividad->usuarioRealiza()->get();
+        $data->habilidad = $actividad->habilidad()->get();
+        return response()->json(['status'=>'ok','data'=>$data],200);
+
     }
 
     /**

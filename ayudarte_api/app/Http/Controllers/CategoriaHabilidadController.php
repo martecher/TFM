@@ -19,11 +19,7 @@ class CategoriaHabilidadController extends Controller
     //version paginada
     $categoriasHabilidades=Cache::remember('cachecategoriasHabilidades',15/60,function()
         {
-            // Para la paginación en Laravel se usa "Paginator"
-            // En lugar de devolver
-            // return Fabricante::all();
-            // devolveremos return Fabricante::paginate();
-            //
+
             // Este método paginate() está orientado a interfaces gráficas.
             // Paginator tiene un método llamado render() que permite construir
             // los enlaces a página siguiente, anterior, etc..

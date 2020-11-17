@@ -28,16 +28,17 @@ class ActividadesRealizadas extends Model
     public function usuarioSolicita()
     {
         // 1 actividad tiene un usuario solicita
-         return $this->belongsTo('App\Usuario', 'usuario_id', 'usuarioSolicita_id');
+         return $this->belongsTo('App\Models\Usuario', 'usuarioSolicita_id', 'usuario_id');
     }
         public function usuarioRealiza()
     {
         // 1 actividad tiene un usuario que realiza
-         return $this->belongsTo('App\Usuario', 'usuario_id', 'usuarioRealiza_id');
+         return $this->belongsTo('App\Models\Usuario', 'usuarioRealiza_id', 'usuario_id');
     }
-    public function categoria()
+    public function habilidad()
     {
         // 1 actividad tiene una habilidad
-         return $this->belongsTo('App\Habilidad');
+         return $this->belongsTo('App\Models\Habilidad','habilidad_id');
+
     }
 }

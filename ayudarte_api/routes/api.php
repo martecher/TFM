@@ -26,3 +26,5 @@ Route::apiResource('categoriasHabilidades', 'App\Http\Controllers\CategoriaHabil
 Route::apiResource('usuarios', 'App\Http\Controllers\UsuarioController',['except'=>['edit','create'] ])->middleware( 'auth:sanctum');
 
 Route::apiResource('habilidades', 'App\Http\Controllers\HabilidadController',['except'=>['edit','create'] ])->middleware( 'auth:sanctum');
+
+Route::apiResource('actividadesRealizadas', 'App\Http\Controllers\ActividadesRealizadasController',['except'=>['edit','create'] ])->middleware( 'auth:sanctum');
