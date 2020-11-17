@@ -102,7 +102,10 @@ class ActividadesRealizadasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $actividad = new ActividadesRealizadas;
+        $actividad = ActividadesRealizadas::findOrFail($id);
+        $actividad->update($request->all());
+        return $actividad;
     }
 
     /**
