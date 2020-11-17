@@ -21,6 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //ruta funcionando sin proteger
 // Route::resource('categoriasHabilidades','App\Http\Controllers\CategoriaHabilidadController');
 
+Route::post('login', 'App\Http\Controllers\AuthController@login');
+
 Route::apiResource('categoriasHabilidades', 'App\Http\Controllers\CategoriaHabilidadController',['except'=>['edit','create'] ])->middleware( 'auth:sanctum');
 
 Route::apiResource('usuarios', 'App\Http\Controllers\UsuarioController',['except'=>['edit','create'] ])->middleware( 'auth:sanctum');

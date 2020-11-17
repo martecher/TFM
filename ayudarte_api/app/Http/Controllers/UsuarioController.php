@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\Cache;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 class UsuarioController extends Controller
 {
     /**
@@ -71,8 +72,9 @@ class UsuarioController extends Controller
         $usuario->reputacion = $request->reputacion;
         $usuario->administrador = $request->administrador;
         $usuario->email = $request->email;
-        $usuario->password = $request->password;
+        $usuario->password = Hash::make($request->password);
 
+//Hash::check($request->password, $user->password, []))
         //Guardamos el cambio en nuestro modelo
 
         $usuario->save();
@@ -134,6 +136,9 @@ class UsuarioController extends Controller
         $usuario = new Usuario;
         $usuario = Usuario::findOrFail($id);
         $usuario->update($request->all());
+
+        $usuario->password = Hash::make($request->password);
+        $usuario->save();
         return $usuario;
     }
 
