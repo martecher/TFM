@@ -17,8 +17,8 @@ class AuthController extends Controller
         'email' => 'email|required',
         'password' => 'required'
       ]);
-      $credentials = request(['email', 'password']);
-      if (!Auth::attempt($credentials)) {
+       $credentials = request(['email', 'password']);
+       if (!Auth::attempt($credentials)) {
         return response()->json([
           'status_code' => 500,
           'message' => 'Unauthorized'
@@ -29,12 +29,15 @@ class AuthController extends Controller
          throw new \Exception('Error usuario y contraseña');
       }
 
+
+
       $user->tokens()->delete();
       $tokenResult = $user->createToken('usuario')->plainTextToken;
       return response()->json([
         'status_code' => 200,
-        'access_token' => $tokenResult,
-        'token_type' => 'Bearer',
+        'token_acceso' => $tokenResult,
+        'usuario' => $user->nombre . ' '.$user->apellido1. ' '.$user->apellido2 ,
+        'tipo_token' => 'Bearer',
       ]);
     } catch (Exception $error) {
       return response()->json([
