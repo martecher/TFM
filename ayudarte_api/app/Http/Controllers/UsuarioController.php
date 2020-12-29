@@ -66,7 +66,10 @@ class UsuarioController extends Controller
         $usuario->nombre = $request->nombre;
         $usuario->apellido1 = $request->apellido1;
         $usuario->apellido2 = $request->apellido2;
-        $usuario->fechaNacimiento = $request->fechaNacimiento;
+ //       $date = date('d/m/Y', strtotime($request->fechaNacimiento));
+        $date = date('Y-m-d', strtotime($request->fechaNacimiento));
+
+        $usuario->fechaNacimiento = $date;
         $usuario->exento = $request->exento;
         $usuario->bolsaHora = $request->bolsaHora;
         $usuario->reputacion = $request->reputacion;
