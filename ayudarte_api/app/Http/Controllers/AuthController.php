@@ -36,7 +36,17 @@ class AuthController extends Controller
       return response()->json([
         'status_code' => 200,
         'token_acceso' => $tokenResult,
-        'usuario' => $user->nombre . ' '.$user->apellido1. ' '.$user->apellido2 ,
+        'nombreUsuario' => $user->nombre . ' '.$user->apellido1. ' '.$user->apellido2 ,
+        'nombre' => $user->nombre,
+        'apellido1' => $user->apellido1,
+        'apellido2' => $user->apellido2,
+        'fechaNacimiento' => $user->fechaNacimiento,
+        'exento' => $user->exento,
+        'bolsaHora' => $user->bolsaHora,
+        'reputacion' => $user->reputacion,
+        'administrador' => $user->administrador,
+        'email' => $user->email,
+        'usuario_id' => $user->usuario_id,
         'tipo_token' => 'Bearer',
       ]);
     } catch (Exception $error) {
