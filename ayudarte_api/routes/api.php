@@ -29,6 +29,7 @@ Route::apiResource('categoriasHabilidades', 'App\Http\Controllers\CategoriaHabil
 Route::post('usuarios', 'App\Http\Controllers\UsuarioController@store');
 Route::get('usuarios', 'App\Http\Controllers\UsuarioController@index')->middleware( 'auth:sanctum');
 Route::put('usuarios', 'App\Http\Controllers\UsuarioController@update')->middleware( 'auth:sanctum');
+Route::get('usuarios/{id}', 'App\Http\Controllers\UsuarioController@show')->middleware( 'auth:sanctum');
 
 
 //Route::apiResource('usuarios', 'App\Http\Controllers\UsuarioController',['except'=>['edit','create'] ])->middleware( 'auth:sanctum');
