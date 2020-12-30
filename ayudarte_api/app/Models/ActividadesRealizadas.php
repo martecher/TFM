@@ -20,7 +20,8 @@ class ActividadesRealizadas extends Model
 		'valoracion',
 		'usuarioSolicita_id',
         'usuarioRealiza_id',
-		'habilidad_id'
+		'habilidad_id',
+        'puntuacionSolicita'
     ];
       // Aquí ponemos los campos que no queremos que se devuelvan en las consultas.
     protected $hidden = ['created_at','updated_at'];

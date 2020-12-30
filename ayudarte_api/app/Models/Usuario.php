@@ -30,7 +30,8 @@ class Usuario extends Authenticatable
         'reputacion',
         'administrador',
         'email',
-        'password'
+        'password',
+        'numeroVotaciones'
     ];
 
     /**
