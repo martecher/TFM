@@ -68,7 +68,7 @@ class ActividadesRealizadasController extends Controller
         {
             // Se devuelve un array errors con los errores encontrados y cabecera HTTP 404.
             // En code podríamos indicar un código de error personalizado de nuestra aplicación si lo deseamos.
-            return response()->json(['errors'=>array(['code'=>404,'message'=>'No se encuentra una actividad con ese código.'])],404);
+            return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.show: No se encuentra una actividad con ese código.'])],404);
         }
 
         $data = (object)[];
@@ -82,6 +82,27 @@ class ActividadesRealizadasController extends Controller
 
     }
 
+    public function noAsignadas()
+    {
+       $actividades=ActividadesRealizadas::whereNull('usuarioRealiza_id')->firstOrFail();
+         if (! $actividades)
+        {
+            // Se devuelve un array errors con los errores encontrados y cabecera HTTP 404.
+            // En code podríamos indicar un código de error personalizado de nuestra aplicación si lo deseamos.
+            return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.noAsignadas: No se encuentran actividades sin listar.'])],404);
+        }
+
+        $data = (object)[];
+        $data->actividades = $actividades;
+  /*      $data->horasReales = $actividad->horasReales;
+        $data->valoracion = $actividad->valoracion;
+        $data->usuarioSolicita = $actividad->usuarioSolicita()->get();
+        $data->usuarioRealizada = $actividad->usuarioRealiza()->get();
+        $data->habilidad = $actividad->habilidad()->get();
+        hay que devolver una lista*/
+        return response()->json(['status'=>'ok','data'=>$data],200);
+
+    }
     /**
      * Show the form for editing the specified resource.
      *
