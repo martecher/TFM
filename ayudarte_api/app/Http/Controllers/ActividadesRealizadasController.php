@@ -84,29 +84,42 @@ class ActividadesRealizadasController extends Controller
 
     public function noAsignadas($valor)
     {
-       $actividades=(object)[];
+       
        if($valor==0){
-            $actividades=ActividadesRealizadas::whereNull('usuarioRealiza_id')->firstOrFail();
+            $actividades=ActividadesRealizadas::whereNull('usuarioRealiza_id')->get();
        }
        else {
-            $actividades=ActividadesRealizadas::whereNotNull('usuarioRealiza_id')->firstOrFail();
+            $actividades=ActividadesRealizadas::whereNotNull('usuarioRealiza_id')->get();
        }
 
         if (! $actividades)
         {
-            // Se devuelve un array errors con los errores encontrados y cabecera HTTP 404.
-            // En code podríamos indicar un código de error personalizado de nuestra aplicación si lo deseamos.
             return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.noAsignadas: No se encuentran actividades sin listar.'])],404);
         }
 
         $data = (object)[];
         $data->actividades = $actividades;
-  /*      $data->horasReales = $actividad->horasReales;
-        $data->valoracion = $actividad->valoracion;
-        $data->usuarioSolicita = $actividad->usuarioSolicita()->get();
-        $data->usuarioRealizada = $actividad->usuarioRealiza()->get();
-        $data->habilidad = $actividad->habilidad()->get();
-        hay que devolver una lista*/
+        return response()->json(['status'=>'ok','data'=>$actividades],200);
+
+    }
+
+    public function finalizadas($valor)
+    {
+       $actividades=(object)[];
+       if($valor==0){
+            $actividades=ActividadesRealizadas::whereNull('finalizada')->orWhere('finalizada',0)->get();
+       }
+       else {
+            $actividades=ActividadesRealizadas::whereNotNull('finalizada')->where('finalizada',1)->get();
+       }
+
+        if (! $actividades)
+        {
+            return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.noAsignadas: No se encuentran actividades sin listar.'])],404);
+        }
+
+        $data = (object)[];
+        $data->actividades = $actividades;
         return response()->json(['status'=>'ok','data'=>$data],200);
 
     }
