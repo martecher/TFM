@@ -41,4 +41,4 @@ Route::apiResource('habilidades', 'App\Http\Controllers\HabilidadController',['e
 Route::get('actividadesRealizadas', 'App\Http\Controllers\ActividadesRealizadasController@index')->middleware( 'auth:sanctum');
 Route::put('actividadesRealizadas', 'App\Http\Controllers\ActividadesRealizadasController@update')->middleware( 'auth:sanctum');
 Route::get('actividadesRealizadas/{id}', 'App\Http\Controllers\ActividadesRealizadasController@show')->middleware( 'auth:sanctum');
-Route::get('actividadesRealizadas/listar/noAsignadas', 'App\Http\Controllers\ActividadesRealizadasController@noAsignadas')->middleware( 'auth:sanctum');
+Route::get('actividadesRealizadas/asignadas/{valor}', 'App\Http\Controllers\ActividadesRealizadasController@noAsignadas')->middleware( 'auth:sanctum');

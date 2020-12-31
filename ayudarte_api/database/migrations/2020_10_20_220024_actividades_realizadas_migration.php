@@ -19,6 +19,7 @@ class ActividadesRealizadasMigration extends Migration
             $table->float('horasReales');
             $table->float('valoracion');
             $table->float('puntuacionSolicita');
+            $table->integer('finalizada');
             $table->integer('usuarioSolicita_id')->unsigned();
             $table->integer('usuarioRealiza_id')->unsigned();
             $table->integer('habilidad_id')->unsigned();

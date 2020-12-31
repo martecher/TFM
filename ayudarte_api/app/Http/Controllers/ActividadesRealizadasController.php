@@ -82,10 +82,17 @@ class ActividadesRealizadasController extends Controller
 
     }
 
-    public function noAsignadas()
+    public function noAsignadas($valor)
     {
-       $actividades=ActividadesRealizadas::whereNull('usuarioRealiza_id')->firstOrFail();
-         if (! $actividades)
+       $actividades=(object)[];
+       if($valor==0){
+            $actividades=ActividadesRealizadas::whereNull('usuarioRealiza_id')->firstOrFail();
+       }
+       else {
+            $actividades=ActividadesRealizadas::whereNotNull('usuarioRealiza_id')->firstOrFail();
+       }
+
+        if (! $actividades)
         {
             // Se devuelve un array errors con los errores encontrados y cabecera HTTP 404.
             // En code podríamos indicar un código de error personalizado de nuestra aplicación si lo deseamos.
