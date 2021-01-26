@@ -86,10 +86,10 @@ class ActividadesRealizadasController extends Controller
     {
        
        if($valor==0){
-            $actividades=ActividadesRealizadas::whereNull('usuarioRealiza_id')->get();
+            $actividades=ActividadesRealizadas::whereNull('usuarioRealiza_id')->with('usuarioSolicita')->get();
        }
        else {
-            $actividades=ActividadesRealizadas::whereNotNull('usuarioRealiza_id')->get();
+            $actividades=ActividadesRealizadas::whereNotNull('usuarioRealiza_id')->with(['usuarioSolicita', 'usuarioRealiza'])->get();
        }
 
         if (! $actividades)
