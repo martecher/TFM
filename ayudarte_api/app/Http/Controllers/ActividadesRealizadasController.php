@@ -86,10 +86,10 @@ class ActividadesRealizadasController extends Controller
     {
        
        if($valor==0){
-            $actividades=ActividadesRealizadas::whereNull('usuarioRealiza_id')->with('usuarioSolicita', 'habilidad')->get();
+            $actividades=ActividadesRealizadas::whereNull('finalizada')->orWhere('finalizada',0)->whereNull('usuarioRealiza_id')->with('usuarioSolicita', 'habilidad')->get();
        }
        else {
-            $actividades=ActividadesRealizadas::whereNotNull('usuarioRealiza_id')->with(['usuarioSolicita', 'usuarioRealiza', 'habilidad'])->get();
+            $actividades=ActividadesRealizadas::whereNull('finalizada')->orWhere('finalizada',0)->whereNotNull('usuarioRealiza_id')->with(['usuarioSolicita', 'usuarioRealiza', 'habilidad'])->get();
        }
 
         if (! $actividades)
@@ -110,7 +110,7 @@ class ActividadesRealizadasController extends Controller
             $actividades=ActividadesRealizadas::whereNull('finalizada')->orWhere('finalizada',0)->get();
        }
        else {
-            $actividades=ActividadesRealizadas::whereNotNull('finalizada')->where('finalizada',1)->get();
+            $actividades=ActividadesRealizadas::whereNotNull('finalizada')->orWhere('finalizada',1)->get();
        }
 
         if (! $actividades)
