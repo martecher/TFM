@@ -82,7 +82,7 @@ class ActividadesRealizadasController extends Controller
 
     }
 
-    public function noAsignadas($valor)
+    public function asignadas($valor)
     {
        
        if($valor==0){
@@ -103,14 +103,48 @@ class ActividadesRealizadasController extends Controller
 
     }
 
+    public function asignadasUsuario($id)
+    {
+
+        $actividades=ActividadesRealizadas::whereNull('finalizada')->orWhere('finalizada',0)->where('usuarioRealiza_id',$id)->with('usuarioSolicita', 'habilidad','usuarioRealiza')->get();
+      
+
+        if (! $actividades)
+        {
+            return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.noAsignadas: No se encuentran actividades sin listar.'])],404);
+        }
+
+        $data = (object)[];
+        $data->actividades = $actividades;
+        return response()->json(['status'=>'ok','data'=>$actividades],200);
+
+    }
+
+    public function solicitadasUsuario($id)
+    {
+
+        $actividades=ActividadesRealizadas::whereNull('finalizada')->orWhere('finalizada',0)->where('usuarioSolicita_id',$id)->with('usuarioSolicita', 'habilidad','usuarioRealiza')->get();
+      
+
+        if (! $actividades)
+        {
+            return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.noAsignadas: No se encuentran actividades sin listar.'])],404);
+        }
+
+        $data = (object)[];
+        $data->actividades = $actividades;
+        return response()->json(['status'=>'ok','data'=>$actividades],200);
+
+    }
+
     public function finalizadas($valor)
     {
-       $actividades=(object)[];
+
        if($valor==0){
-            $actividades=ActividadesRealizadas::whereNull('finalizada')->orWhere('finalizada',0)->get();
+            $actividades=ActividadesRealizadas::whereNull('finalizada')->orWhere('finalizada',0)->with('usuarioSolicita', 'habilidad','usuarioRealiza')->get();
        }
        else {
-            $actividades=ActividadesRealizadas::whereNotNull('finalizada')->orWhere('finalizada',1)->get();
+            $actividades=ActividadesRealizadas::whereNotNull('finalizada')->orWhere('finalizada',1)->with('usuarioSolicita', 'habilidad','usuarioRealiza')->get();
        }
 
         if (! $actividades)
@@ -123,6 +157,46 @@ class ActividadesRealizadasController extends Controller
         return response()->json(['status'=>'ok','data'=>$data],200);
 
     }
+
+
+    public function enRealizacionUsuario($id)
+    {
+        $actividades=ActividadesRealizadas::where('finalizada',0)->where('usuarioRealiza_id', $id)->with('usuarioSolicita', 'habilidad','usuarioRealiza')->get();
+        if (! $actividades)
+        {
+            return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.enRealizacionUsuario: No se encuentran actividades sin listar.'])],404);
+        }
+        $data = (object)[];
+        $data->actividades = $actividades;
+        return response()->json(['status'=>'ok','data'=>$actividades],200);
+    }
+
+
+    public function enSolicitudUsuario($id)
+    {
+        $actividades=ActividadesRealizadas::where('finalizada',0)->where('usuarioSolicita_id', $id)->with('usuarioSolicita', 'habilidad','usuarioRealiza')->get();
+        if (! $actividades)
+        {
+            return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.enRealizacionUsuario: No se encuentran actividades sin listar.'])],404);
+        }
+        $data = (object)[];
+        $data->actividades = $actividades;
+        return response()->json(['status'=>'ok','data'=>$actividades],200);
+    }
+
+
+    public function enTerminadasUsuario($id)
+    {    //falta por añadir el filtro finalizada
+        $actividades=ActividadesRealizadas::where('usuarioSolicita_id', $id)->where('finalizada',1)->orWhere('usuarioRealiza_id', $id)->where('finalizada',1)->with('usuarioSolicita', 'habilidad','usuarioRealiza')->get();
+        if (! $actividades)
+        {
+            return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.enRealizacionUsuario: No se encuentran actividades sin listar.'])],404);
+        }
+        $data = (object)[];
+        $data->actividades = $actividades;
+        return response()->json(['status'=>'ok','data'=>$actividades],200);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
