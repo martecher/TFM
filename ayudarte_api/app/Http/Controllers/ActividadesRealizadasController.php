@@ -94,7 +94,7 @@ class ActividadesRealizadasController extends Controller
 
         if (! $actividades)
         {
-            return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.noAsignadas: No se encuentran actividades sin listar.'])],404);
+            return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.asignadas: No se encuentran actividades sin listar.'])],404);
         }
 
         $data = (object)[];
@@ -111,7 +111,7 @@ class ActividadesRealizadasController extends Controller
 
         if (! $actividades)
         {
-            return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.noAsignadas: No se encuentran actividades sin listar.'])],404);
+            return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.asignadasUsuario: No se encuentran actividades sin listar.'])],404);
         }
 
         $data = (object)[];
@@ -128,7 +128,7 @@ class ActividadesRealizadasController extends Controller
 
         if (! $actividades)
         {
-            return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.noAsignadas: No se encuentran actividades sin listar.'])],404);
+            return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.solicitadasUsuario: No se encuentran actividades sin listar.'])],404);
         }
 
         $data = (object)[];
@@ -149,7 +149,7 @@ class ActividadesRealizadasController extends Controller
 
         if (! $actividades)
         {
-            return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.noAsignadas: No se encuentran actividades sin listar.'])],404);
+            return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.finalizadas: No se encuentran actividades sin listar.'])],404);
         }
 
         $data = (object)[];
@@ -177,7 +177,7 @@ class ActividadesRealizadasController extends Controller
         $actividades=ActividadesRealizadas::where('finalizada',0)->where('usuarioSolicita_id', $id)->with('usuarioSolicita', 'habilidad','usuarioRealiza')->get();
         if (! $actividades)
         {
-            return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.enRealizacionUsuario: No se encuentran actividades sin listar.'])],404);
+            return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.enSolicitudUsuario: No se encuentran actividades sin listar.'])],404);
         }
         $data = (object)[];
         $data->actividades = $actividades;
@@ -190,13 +190,36 @@ class ActividadesRealizadasController extends Controller
         $actividades=ActividadesRealizadas::where('usuarioSolicita_id', $id)->where('finalizada',1)->orWhere('usuarioRealiza_id', $id)->where('finalizada',1)->with('usuarioSolicita', 'habilidad','usuarioRealiza')->get();
         if (! $actividades)
         {
-            return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.enRealizacionUsuario: No se encuentran actividades sin listar.'])],404);
+            return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.enTerminadasUsuario: No se encuentran actividades sin listar.'])],404);
         }
         $data = (object)[];
         $data->actividades = $actividades;
         return response()->json(['status'=>'ok','data'=>$actividades],200);
     }
 
+    public function solicitadasPorUsuario($id)
+    {    
+        $actividades=ActividadesRealizadas::where('usuarioSolicita_id', $id)->with('usuarioSolicita', 'habilidad','usuarioRealiza')->get();
+        if (! $actividades)
+        {
+            return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.solicitadasPorUsuario: No se encuentran actividades sin listar.'])],404);
+        }
+        $data = (object)[];
+        $data->actividades = $actividades;
+        return response()->json(['status'=>'ok','data'=>$actividades],200);
+    }
+
+    public function realizadasPorUsuario($id)
+    {
+        $actividades=ActividadesRealizadas::where('usuarioRealiza_id', $id)->with('usuarioSolicita', 'habilidad','usuarioRealiza')->get();
+        if (! $actividades)
+        {
+            return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.realizadasPorUsuario: No se encuentran actividades sin listar.'])],404);
+        }
+        $data = (object)[];
+        $data->actividades = $actividades;
+        return response()->json(['status'=>'ok','data'=>$actividades],200);
+    }
     /**
      * Show the form for editing the specified resource.
      *
