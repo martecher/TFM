@@ -76,10 +76,11 @@ class ActividadesRealizadasController extends Controller
         $data->horasReales = $actividad->horasReales;
         $data->valoracion = $actividad->valoracion;
         $data->usuarioSolicita = $actividad->usuarioSolicita()->get();
-        $data->usuarioRealizada = $actividad->usuarioRealiza()->get();
+        $data->usuarioRealiza = $actividad->usuarioRealiza()->get();
         $data->habilidad = $actividad->habilidad()->get();
+        $data->puntuacionSolicita = $actividad->puntuacionSolicita;
+        $data->finalizada = $actividad->finalizada;
         return response()->json(['status'=>'ok','data'=>$data],200);
-
     }
 
     public function asignadas($valor)
