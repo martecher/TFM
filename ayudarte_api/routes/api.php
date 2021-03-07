@@ -42,7 +42,7 @@ Route::get('actividadesRealizadas', 'App\Http\Controllers\ActividadesRealizadasC
 
 Route::put('actividadesRealizadas', 'App\Http\Controllers\ActividadesRealizadasController@update')->middleware( 'auth:sanctum');
 
-Route::get('actividadesRealizadas/{id}', 'App\Http\Controllers\ActividadesRealizadasController@show')->middleware( 'auth:sanctum');
+Route::get('actividadesRealizadas/{id}', 'App\Http\Controllers\ActividadesRealizadasController@show');
 
 Route::get('actividadesRealizadas/asignadas/{valor}', 'App\Http\Controllers\ActividadesRealizadasController@asignadas')->middleware( 'auth:sanctum');
 

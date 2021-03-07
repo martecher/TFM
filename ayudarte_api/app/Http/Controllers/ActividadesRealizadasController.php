@@ -64,13 +64,14 @@ class ActividadesRealizadasController extends Controller
     public function show($id)
     {
          //OJO  QUE NO SE SI ESTE METODO BUSCA BIEN Y CARGA LOS OBJETOS RELACIONADOS
-       $actividad=ActividadesRealizadas::where('id',$id)->with('usuarioSolicita', 'habilidad','usuarioRealiza')->get();
+       $actividad=ActividadesRealizadas::find($id);
          if (! $actividad)
         {
             // Se devuelve un array errors con los errores encontrados y cabecera HTTP 404.
             // En code podríamos indicar un código de error personalizado de nuestra aplicación si lo deseamos.
             return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.show: No se encuentra una actividad con ese código.'])],404);
         }
+
 
         $data = (object)[];
         $data->observacion = $actividad->observacion;
