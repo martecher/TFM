@@ -63,7 +63,8 @@ class ActividadesRealizadasController extends Controller
      */
     public function show($id)
     {
-       $actividad=ActividadesRealizadas::find($id);
+         //OJO  QUE NO SE SI ESTE METODO BUSCA BIEN Y CARGA LOS OBJETOS RELACIONADOS
+       $actividad=ActividadesRealizadas::where('id',$id)->with('usuarioSolicita', 'habilidad','usuarioRealiza')->get();
          if (! $actividad)
         {
             // Se devuelve un array errors con los errores encontrados y cabecera HTTP 404.
