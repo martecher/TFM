@@ -21,7 +21,7 @@ class UsuariosMigration extends Migration
             $table->date('fechaNacimiento');
             $table->boolean('exento');
             $table->float('bolsaHora');
-            $table->float('reputacion');
+            $table->integer('reputacion');
             $table->boolean('administrador');
             $table->string('email')->unique();
             $table->string('password');
