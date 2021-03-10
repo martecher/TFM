@@ -40,7 +40,7 @@ Route::apiResource('habilidades', 'App\Http\Controllers\HabilidadController',['e
 
 Route::get('actividadesRealizadas', 'App\Http\Controllers\ActividadesRealizadasController@index')->middleware( 'auth:sanctum');
 
-Route::put('actividadesRealizadas/{id}', 'App\Http\Controllers\ActividadesRealizadasController@update')->middleware( 'auth:sanctum');
+Route::put('actividadesRealizadas/{id}', 'App\Http\Controllers\ActividadesRealizadasController@update');
 
 Route::get('actividadesRealizadas/{id}', 'App\Http\Controllers\ActividadesRealizadasController@show')->middleware( 'auth:sanctum');
 
