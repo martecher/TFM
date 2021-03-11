@@ -176,8 +176,8 @@ class ActividadesRealizadasController extends Controller
 
 
     public function enSolicitudUsuario($id)
-    {
-        $actividades=ActividadesRealizadas::where('finalizada',0)->where('usuarioSolicita_id', $id)->with('usuarioSolicita', 'habilidad','usuarioRealiza')->get();
+    {   
+        $actividades=ActividadesRealizadas::where('finalizada',0)->where('usuarioSolicita_id', $id)->whereNotNull('usuarioRealiza_id')->with('usuarioSolicita', 'habilidad','usuarioRealiza')->get();
         if (! $actividades)
         {
             return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.enSolicitudUsuario: No se encuentran actividades sin listar.'])],404);
