@@ -14,6 +14,7 @@ class Mensaje extends Model
 		'leido',
 		'usuarioEnvia_id',
         'usuarioReacibe_id',
+        'orden',
 		'tarea_id'
     ];
   // Aquí ponemos los campos que no queremos que se devuelvan en las consultas.

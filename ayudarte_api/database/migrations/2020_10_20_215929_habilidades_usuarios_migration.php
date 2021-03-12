@@ -14,7 +14,7 @@ class HabilidadesUsuariosMigration extends Migration
     public function up()
     {
         Schema::create('habilidad_usuario', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->integer('usuario_id');
             $table->integer('habilidad_id');
         });

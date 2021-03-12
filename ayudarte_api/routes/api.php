@@ -21,22 +21,42 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //ruta funcionando sin proteger
 // Route::resource('categoriasHabilidades','App\Http\Controllers\CategoriaHabilidadController');
 
+// ********  Comienza Rutas de Login   ******** 
+
 Route::post('login', 'App\Http\Controllers\AuthController@login');
 
+//  ******** Fin Rutas de Login   ******** 
+
+// ********  Comienza Rutas de Categorias   ******** 
 Route::apiResource('categoriasHabilidades', 'App\Http\Controllers\CategoriaHabilidadController',['except'=>['edit','create'] ])->middleware( 'auth:sanctum');
 
+// ********  Comienza Rutas de Categorias   ******** 
 
+//  ******** Comienza Rutas  de Usuarios  ******** 
 Route::post('usuarios', 'App\Http\Controllers\UsuarioController@store');
 Route::get('usuarios', 'App\Http\Controllers\UsuarioController@index')->middleware( 'auth:sanctum');
 Route::put('usuarios/{id}', 'App\Http\Controllers\UsuarioController@update')->middleware( 'auth:sanctum');
 Route::get('usuarios/{id}', 'App\Http\Controllers\UsuarioController@show')->middleware( 'auth:sanctum');
+//  ********  Fin Rutas  de Usuarios  ******** 
+
 
 
 //Route::apiResource('usuarios', 'App\Http\Controllers\UsuarioController',['except'=>['edit','create'] ])->middleware( 'auth:sanctum');
 
+
+
+
+//  ******** Comienza Rutas de habilidades  ******** 
+
 Route::apiResource('habilidades', 'App\Http\Controllers\HabilidadController',['except'=>['edit','create'] ])->middleware( 'auth:sanctum');
 
+//  ******** Fin Rutas de habilidades  ******** 
+
+
 //Route::apiResource('actividadesRealizadas', 'App\Http\Controllers\ActividadesRealizadasController',['except'=>['edit','create'] ])->middleware( 'auth:sanctum');
+
+
+//  ******** Comienza Rutas de Actividades  ******** 
 
 Route::get('actividadesRealizadas', 'App\Http\Controllers\ActividadesRealizadasController@index')->middleware( 'auth:sanctum');
 
@@ -62,3 +82,18 @@ Route::get('actividadesRealizadas/solicitadasPorUsuario/{id}', 'App\Http\Control
 
 
 Route::get('actividadesRealizadas/realizadasPorUsuario/{id}', 'App\Http\Controllers\ActividadesRealizadasController@realizadasPorUsuario')->middleware( 'auth:sanctum');
+
+//  ******** Fin Rutas de Actividades  ******** 
+
+
+
+//  ******** Comienza Rutas de Mensajes  ******** 
+
+Route::get('mensajes/tarea/{id}', 'App\Http\Controllers\MensajeController@mensajesDeLaTarea')->middleware( 'auth:sanctum');
+Route::post('mensajes/tarea/{id}', 'App\Http\Controllers\MensajeController@store')->middleware( 'auth:sanctum');
+
+
+ 
+
+//  ******** Fin Rutas de Mensajes  ******** 
+

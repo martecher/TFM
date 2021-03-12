@@ -43,4 +43,9 @@ class ActividadesRealizadas extends Model
          return $this->belongsTo('App\Models\Habilidad','habilidad_id');
 
     }
+
+    public function mensajesTarea()
+    {
+        return $this->hasMany('App\Models\Mensaje', 'tarea_id');
+    }
 }

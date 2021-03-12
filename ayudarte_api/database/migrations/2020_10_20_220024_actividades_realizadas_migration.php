@@ -14,11 +14,11 @@ class ActividadesRealizadasMigration extends Migration
     public function up()
     {
         Schema::create('actividadesRealizadas', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('observacion');
             $table->float('horasReales');
-            $table->float('valoracion');
-            $table->float('puntuacionSolicita');
+            $table->integer('valoracion');
+            $table->integer('puntuacionSolicita');
             $table->integer('finalizada');
             $table->integer('usuarioSolicita_id')->unsigned();
             $table->integer('usuarioRealiza_id')->unsigned();
