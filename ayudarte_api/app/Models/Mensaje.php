@@ -13,7 +13,7 @@ class Mensaje extends Model
         'texto',
 		'leido',
 		'usuarioEnvia_id',
-        'usuarioReacibe_id',
+        'usuarioRecibe_id',
         'orden',
 		'tarea_id'
     ];
@@ -30,7 +30,7 @@ class Mensaje extends Model
     public function usuarioRecibe()
     {
         // 1 actividad tiene un usuario solicita
-         return $this->belongsTo('App\Models\Usuario', 'usuarioReacibe_id', 'usuario_id');
+         return $this->belongsTo('App\Models\Usuario', 'usuarioRecibe_id', 'usuario_id');
     }
 
     public function tarea()

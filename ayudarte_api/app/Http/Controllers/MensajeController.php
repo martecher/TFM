@@ -101,8 +101,7 @@ class MensajeController extends Controller
     }
     public function mensajesDeLaTarea($id)
     {
-        $mensajes=Mensaje::where('tarea_id', $id)->with('usuarioEnvia', 'usuarioRecibe','tarea')
-        ->orderBy('orden', 'asc')->get();
+        $mensajes=Mensaje::where('tarea_id', $id)->with('usuarioEnvia', 'usuarioRecibe')->orderBy('orden', 'asc')->get();
         if (! $mensajes)
         {
             return response()->json(['errors'=>array(['code'=>404,'message'=>'MensajeController.mensajesDeLaTarea: No se encuentran mensajes sin listar.'])],404);

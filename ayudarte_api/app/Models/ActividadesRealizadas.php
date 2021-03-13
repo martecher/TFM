@@ -48,4 +48,6 @@ class ActividadesRealizadas extends Model
     {
         return $this->hasMany('App\Models\Mensaje', 'tarea_id');
     }
+
+ 
 }
