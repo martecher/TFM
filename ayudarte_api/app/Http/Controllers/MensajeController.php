@@ -106,8 +106,27 @@ class MensajeController extends Controller
         {
             return response()->json(['errors'=>array(['code'=>404,'message'=>'MensajeController.mensajesDeLaTarea: No se encuentran mensajes sin listar.'])],404);
         }
+
+        for($i = 0, $size = count($mensajes); $i < $size; ++$i) {
+            $mensaje=  $mensajes[$i];
+            $mensaje->leido=1;
+            $mensaje->update();
+        }
+
+        $mensajes=Mensaje::where('tarea_id', $id)->with('usuarioEnvia', 'usuarioRecibe')->orderBy('orden', 'asc')->get();
+        return response()->json(['status'=>'ok','data'=>$mensajes],200);
+    }
+
+    public function marcarleidos($id)
+    {
+        $mensajes=Mensaje::where('tarea_id', $id);
+        if (! $mensajes)
+        {
+            return response()->json(['errors'=>array(['code'=>404,'message'=>'MensajeController.mensajesDeLaTarea: No se encuentran mensajes sin listar.'])],404);
+        }
         $data = (object)[];
         $data->mensajes = $mensajes;
         return response()->json(['status'=>'ok','data'=>$mensajes],200);
     }
+
 }

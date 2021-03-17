@@ -91,6 +91,7 @@ Route::get('actividadesRealizadas/realizadasPorUsuario/{id}', 'App\Http\Controll
 
 Route::get('mensajesTarea/tarea/{id}', 'App\Http\Controllers\MensajeController@mensajesDeLaTarea')->middleware( 'auth:sanctum');
 Route::post('mensajes/tarea/{id}', 'App\Http\Controllers\MensajeController@store')->middleware( 'auth:sanctum');
+Route::post('mensajes/tarea/marcarleidos/{id}', 'App\Http\Controllers\MensajeController@mensajesDeLaTarea')->middleware( 'auth:sanctum');
 
 
  
