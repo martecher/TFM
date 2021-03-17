@@ -80,8 +80,9 @@ Route::get('actividadesRealizadas/actividadesTerminadas/{id}', 'App\Http\Control
 
 Route::get('actividadesRealizadas/solicitadasPorUsuario/{id}', 'App\Http\Controllers\ActividadesRealizadasController@solicitadasPorUsuario')->middleware( 'auth:sanctum');
 
-
 Route::get('actividadesRealizadas/realizadasPorUsuario/{id}', 'App\Http\Controllers\ActividadesRealizadasController@realizadasPorUsuario')->middleware( 'auth:sanctum');
+
+Route::get('actividadesRealizadas/actividadNombre/{nombre}', 'App\Http\Controllers\ActividadesRealizadasController@actividadNombre')->middleware( 'auth:sanctum');
 
 //  ******** Fin Rutas de Actividades  ******** 
 

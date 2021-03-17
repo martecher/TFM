@@ -223,6 +223,30 @@ class ActividadesRealizadasController extends Controller
         $data->actividades = $actividades;
         return response()->json(['status'=>'ok','data'=>$actividades],200);
     }
+
+
+    public function actividadNombre($actividadNombre)
+    {
+        /* algo parecido a esto
+        $users = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->join('orders', 'users.id', '=', 'orders.user_id')
+            ->select('users.*', 'contacts.phone', 'orders.price')
+            ->get();
+             */
+        $actividades=ActividadesRealizadas::where('usuarioRealiza_id', $id)->with('usuarioSolicita', 'habilidad','usuarioRealiza','mensajesTarea')->get();
+        if (! $actividades)
+        {
+            return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.realizadasPorUsuario: No se encuentran actividades sin listar.'])],404);
+        }
+        $data = (object)[];
+        $data->actividades = $actividades;
+        return response()->json(['status'=>'ok','data'=>$actividades],200);
+    }
+
+    
+
+
     /**
      * Show the form for editing the specified resource.
      *
