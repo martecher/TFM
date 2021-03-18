@@ -8,6 +8,7 @@ use App\Models\Usuario;
 use App\Models\Categoria;
 
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class ActividadesRealizadasController extends Controller
 {
@@ -225,7 +226,7 @@ class ActividadesRealizadasController extends Controller
     }
 
 
-    public function actividadNombre($actividadNombre)
+    public function actividadNombre($actividadNombre,$valor)
     {
         /* algo parecido a esto
         $users = DB::table('users')
@@ -234,7 +235,14 @@ class ActividadesRealizadasController extends Controller
             ->select('users.*', 'contacts.phone', 'orders.price')
             ->get();
              */
-        $actividades=ActividadesRealizadas::where('usuarioRealiza_id', $id)->with('usuarioSolicita', 'habilidad','usuarioRealiza','mensajesTarea')->get();
+ //       $actividades=ActividadesRealizadas::where('usuarioRealiza_id', $id)->with('usuarioSolicita', 'habilidad','usuarioRealiza','mensajesTarea')->get();
+/*        $actividadNombre = '%'.$actividadNombre.'%' ;
+        $actividades = DB::table('actividadesRealizadas')
+            ->join('habilidades', 'actividadesRealizadas.habilidad_id', '=', 'habilidades.habilidad_id')
+            ->select('actividadesRealizadas.*','habilidades.*' )
+            ->where('habilidades.descripcion', 'like', $actividadNombre )
+            ->where('actividadesRealizadas.finalizada', '=', $valor )
+            ->get();       
         if (! $actividades)
         {
             return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.realizadasPorUsuario: No se encuentran actividades sin listar.'])],404);
@@ -242,6 +250,23 @@ class ActividadesRealizadasController extends Controller
         $data = (object)[];
         $data->actividades = $actividades;
         return response()->json(['status'=>'ok','data'=>$actividades],200);
+ 
+        if($valor==0){
+            $actividades=ActividadesRealizadas::whereNull('finalizada')->orWhere('finalizada',0)->whereNull('usuarioRealiza_id')->with('usuarioSolicita', 'habilidad','mensajesTarea')->get();
+        }
+        else {
+            $actividades=ActividadesRealizadas::whereNull('finalizada')->orWhere('finalizada',0)->whereNotNull('usuarioRealiza_id')->with(['usuarioSolicita', 'usuarioRealiza', 'habilidad','mensajesTarea'])->get();
+        }
+
+        if (! $actividades)
+        {
+            return response()->json(['errors'=>array(['code'=>404,'message'=>'ActividadesRealizadasController.asignadas: No se encuentran actividades sin listar.'])],404);
+        }
+
+        $data = (object)[];
+        $data->actividades = $actividades;
+        return response()->json(['status'=>'ok','data'=>$actividades],200);
+*/
     }
 
     
