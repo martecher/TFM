@@ -129,4 +129,5 @@ class MensajeController extends Controller
         return response()->json(['status'=>'ok','data'=>$mensajes],200);
     }
 
+    
 }

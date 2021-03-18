@@ -91,8 +91,8 @@ Route::get('actividadesRealizadas/actividadNombre/{nombre}/finalizada/{$valor}',
 //  ******** Comienza Rutas de Mensajes  ******** 
 
 Route::get('mensajesTarea/tarea/{id}', 'App\Http\Controllers\MensajeController@mensajesDeLaTarea')->middleware( 'auth:sanctum');
-Route::post('mensajes/tarea/{id}', 'App\Http\Controllers\MensajeController@store')->middleware( 'auth:sanctum');
-Route::post('mensajes/tarea/marcarleidos/{id}', 'App\Http\Controllers\MensajeController@mensajesDeLaTarea')->middleware( 'auth:sanctum');
+Route::post('mensajes', 'App\Http\Controllers\MensajeController@store')->middleware( 'auth:sanctum');
+Route::put('mensajes/tarea/marcarleidos/{id}', 'App\Http\Controllers\MensajeController@mensajesDeLaTarea')->middleware( 'auth:sanctum');
 
 
  
