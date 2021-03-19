@@ -36,13 +36,32 @@ class MensajeController extends Controller
     public function store(Request $request)
     {
 		// Primero comprobaremos si estamos recibiendo todos los campos.
-		if (!$request->input('texto') || !$request->input('usuarioEnvia_id') || !$request->input('usuarioReacibe_id')  || !$request->input('tarea_id'))
+		if (!$request->input('texto'))
+		{
+			return response()->json(['errors'=>array(['code'=>422,'message'=>' MensajeController.store(): Faltan texto.'])],422);
+		}
+		if (!$request->input('usuarioEnvia_id'))
+		{
+			return response()->json(['errors'=>array(['code'=>422,'message'=>' MensajeController.store(): Faltan usuarioEnvia_id.'])],422);
+		}
+		if (!$request->input('usuarioRecibe_id'))
+		{
+			return response()->json(['errors'=>array(['code'=>422,'message'=>' MensajeController.store(): Faltan usuarioRecibe_id.'])],422);
+		}		
+        if (!$request->input('tarea_id'))
+		{
+			return response()->json(['errors'=>array(['code'=>422,'message'=>' MensajeController.store(): Faltan tarea_id.'])],422);
+		}	       
+        
+        
+      /*  
+        if (!$request->input('texto') || !$request->input('usuarioEnvia_id') || !$request->input('usuarioReacibe_id')  || !$request->input('tarea_id'))
 		{
 			// Se devuelve un array errors con los errores encontrados y cabecera HTTP 422 Unprocessable Entity – [Entidad improcesable] Utilizada para errores de validación.
 			// En code podríamos indicar un código de error personalizado de nuestra aplicación si lo deseamos.
 			return response()->json(['errors'=>array(['code'=>422,'message'=>' MensajeController.store(): Faltan datos necesarios para el proceso de alta de mensaje.'])],422);
 		}
-
+        */
 		// Insertamos una fila en Fabricante con create pasándole todos los datos recibidos.
 		// En $request->all() tendremos todos los campos del formulario recibidos.
 		$mensaje=Mensaje::create($request->all());
