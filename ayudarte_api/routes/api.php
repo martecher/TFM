@@ -84,6 +84,8 @@ Route::get('actividadesRealizadas/realizadasPorUsuario/{id}', 'App\Http\Controll
 
 Route::get('actividadesRealizadas/actividadNombre/{nombre}/finalizada/{$valor}', 'App\Http\Controllers\ActividadesRealizadasController@actividadNombre')->middleware( 'auth:sanctum');
 
+Route::put('actividadesRealizadas/{id}/usuarioId/{usuarioId}', 'App\Http\Controllers\ActividadesRealizadasController@asignarTarea');
+
 //  ******** Fin Rutas de Actividades  ******** 
 
 
