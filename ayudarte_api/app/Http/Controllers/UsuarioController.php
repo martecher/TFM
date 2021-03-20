@@ -145,6 +145,13 @@ class UsuarioController extends Controller
         return $usuario;
     }
 
+    public function updateNoPass(Request $request, $id)
+    {
+        $usuario = new Usuario;
+        $usuario = Usuario::findOrFail($id);
+        $usuario->update($request->all());
+        return $usuario;
+    }
     /**
      * Remove the specified resource from storage.
      *
