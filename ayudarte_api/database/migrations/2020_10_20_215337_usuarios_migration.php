@@ -28,6 +28,11 @@ class UsuariosMigration extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->integer('numeroVotaciones');
+            $table->integer('numVotos5');
+            $table->integer('numVotos4');
+            $table->integer('numVotos3');
+            $table->integer('numVotos2');
+            $table->integer('numVotos1');
         });
     }
 

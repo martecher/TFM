@@ -31,7 +31,12 @@ class Usuario extends Authenticatable
         'administrador',
         'email',
         'password',
-        'numeroVotaciones'
+        'numeroVotaciones',
+        'numVotos5',
+        'numVotos4',
+        'numVotos3',
+        'numVotos2',
+        'numVotos1'
     ];
 
     /**
