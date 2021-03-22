@@ -114,7 +114,6 @@ class HabilidadController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $habilidad = new Habilidad;
         $habilidad = Habilidad::findOrFail($id);
         $habilidad->update($request->all());

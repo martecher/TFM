@@ -28,8 +28,10 @@ Route::post('login', 'App\Http\Controllers\AuthController@login');
 //  ******** Fin Rutas de Login   ******** 
 
 // ********  Comienza Rutas de Categorias   ******** 
-Route::apiResource('categoriasHabilidades', 'App\Http\Controllers\CategoriaHabilidadController',['except'=>['edit','create'] ])->middleware( 'auth:sanctum');
-
+//Route::apiResource('categoriasHabilidades', 'App\Http\Controllers\CategoriaHabilidadController',['except'=>['edit','create'] ])->middleware( 'auth:sanctum');
+Route::put('categoriasHabilidades/{id}', 'App\Http\Controllers\CategoriaHabilidadController@update')->middleware( 'auth:sanctum');
+Route::get('categoriasHabilidades/{id}', 'App\Http\Controllers\CategoriaHabilidadController@show')->middleware( 'auth:sanctum');
+Route::post('categoriasHabilidades', 'App\Http\Controllers\CategoriaHabilidadController@store');
 // ********  Comienza Rutas de Categorias   ******** 
 
 //  ******** Comienza Rutas  de Usuarios  ******** 
@@ -51,7 +53,11 @@ Route::put('usuarios/updateNoPass/{id}', 'App\Http\Controllers\UsuarioController
 
 //  ******** Comienza Rutas de habilidades  ******** 
 
-Route::apiResource('habilidades', 'App\Http\Controllers\HabilidadController',['except'=>['edit','create'] ])->middleware( 'auth:sanctum');
+//Route::apiResource('habilidades', 'App\Http\Controllers\HabilidadController',['except'=>['edit','create'] ])->middleware( 'auth:sanctum');
+Route::put('habilidades/{id}', 'App\Http\Controllers\HabilidadController@update')->middleware( 'auth:sanctum');
+Route::get('habilidades/{id}', 'App\Http\Controllers\HabilidadController@show')->middleware( 'auth:sanctum');
+Route::post('habilidades', 'App\Http\Controllers\HabilidadController@store');
+Route::get('habilidades', 'App\Http\Controllers\HabilidadController@index')->middleware( 'auth:sanctum');
 
 //  ******** Fin Rutas de habilidades  ******** 
 
