@@ -32,6 +32,8 @@ Route::post('login', 'App\Http\Controllers\AuthController@login');
 Route::put('categoriasHabilidades/{id}', 'App\Http\Controllers\CategoriaHabilidadController@update')->middleware( 'auth:sanctum');
 Route::get('categoriasHabilidades/{id}', 'App\Http\Controllers\CategoriaHabilidadController@show')->middleware( 'auth:sanctum');
 Route::post('categoriasHabilidades', 'App\Http\Controllers\CategoriaHabilidadController@store');
+Route::get('categoriasHabilidades', 'App\Http\Controllers\CategoriaHabilidadController@index')->middleware( 'auth:sanctum');
+
 // ********  Comienza Rutas de Categorias   ******** 
 
 //  ******** Comienza Rutas  de Usuarios  ******** 
