@@ -130,4 +130,19 @@ class HabilidadController extends Controller
     {
         //
     }
+
+    public function categoriaId( $id)
+    {
+        
+        $habilidades=Habilidad::where('categoria_Habilidad_id', $id)->get();
+        if (! $habilidades)
+        {
+            return response()->json(['errors'=>array(['code'=>404,'message'=>'HabilidadController.categoriaId: No se encuentran actihabilidadesvidades a listar.'])],404);
+        }
+        $data = (object)[];
+        $data->habilidades = $habilidades;
+        return response()->json(['status'=>'ok','data'=>$habilidades],200);
+
+
+    }
 }

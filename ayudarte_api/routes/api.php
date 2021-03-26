@@ -60,6 +60,7 @@ Route::put('habilidades/{id}', 'App\Http\Controllers\HabilidadController@update'
 Route::get('habilidades/{id}', 'App\Http\Controllers\HabilidadController@show')->middleware( 'auth:sanctum');
 Route::post('habilidades', 'App\Http\Controllers\HabilidadController@store');
 Route::get('habilidades', 'App\Http\Controllers\HabilidadController@index')->middleware( 'auth:sanctum');
+Route::get('habilidades/categoria/{id}', 'App\Http\Controllers\HabilidadController@categoriaId')->middleware( 'auth:sanctum');
 
 //  ******** Fin Rutas de habilidades  ******** 
 
