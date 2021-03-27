@@ -53,8 +53,16 @@ class ActividadesRealizadasController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+         
+        $tarea = new ActividadesRealizadas;
+       
+        $tarea->observacion = $request->observacion;
+        $tarea->usuarioSolicita_id = $request->usuarioSolicita_id;
+        $tarea->habilidad_id = $request->habilidad_id;
+        $tarea->finalizada = 0;
+        $tarea->valoracion = 0;
+        $tarea->save();
+     }
 
     /**
      * Display the specified resource.
