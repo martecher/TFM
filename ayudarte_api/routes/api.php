@@ -42,6 +42,7 @@ Route::get('usuarios', 'App\Http\Controllers\UsuarioController@index')->middlewa
 Route::put('usuarios/{id}', 'App\Http\Controllers\UsuarioController@update')->middleware( 'auth:sanctum');
 Route::get('usuarios/{id}', 'App\Http\Controllers\UsuarioController@show')->middleware( 'auth:sanctum');
 Route::put('usuarios/updateNoPass/{id}', 'App\Http\Controllers\UsuarioController@updateNoPass')->middleware( 'auth:sanctum');
+Route::get('rankingUsuarios', 'App\Http\Controllers\UsuarioController@ranking')->middleware( 'auth:sanctum');
 
 
 //  ********  Fin Rutas  de Usuarios  ******** 

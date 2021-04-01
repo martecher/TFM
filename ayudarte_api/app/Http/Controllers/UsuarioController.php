@@ -7,6 +7,9 @@ use App\Models\Usuario;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+
+
 class UsuarioController extends Controller
 {
     /**
@@ -162,6 +165,19 @@ class UsuarioController extends Controller
     {
         //
         return "Se borra un usuarios.";
+
+    }
+
+    public function ranking()
+    {
+        $usuarios=Usuario::Where('reputacion','>=', 0)->where('nombre','!=' ,'Sistema')->with('habilidades')->orderBy('reputacion', 'desc')->get();
+        if (! $usuarios)
+        {
+            return response()->json(['errors'=>array(['code'=>404,'message'=>'UsuariosController.ranking: No se encuentran usuarios para listar.'])],404);
+        }
+        $data = (object)[];
+        $data->usuarios = $usuarios;
+        return response()->json(['status'=>'ok','data'=>$usuarios],200);
 
     }
 }
