@@ -36,7 +36,8 @@ class Usuario extends Authenticatable
         'numVotos4',
         'numVotos3',
         'numVotos2',
-        'numVotos1'
+        'numVotos1',
+        'sobreMi'
     ];
 
     /**
