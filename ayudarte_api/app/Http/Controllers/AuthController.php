@@ -49,6 +49,8 @@ class AuthController extends Controller
         'usuario_id' => $user->usuario_id,
         'numeroVotaciones' => $user->numeroVotaciones,
         'sobreMi' => $user->sobreMi,
+        'habilidades' => $user->habilidades,
+
         'tipo_token' => 'Bearer',
       ]);
     } catch (Exception $error) {
