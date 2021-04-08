@@ -148,6 +148,22 @@ class UsuarioController extends Controller
         return $usuario;
     }
 
+    public function asignarDesasignarHabilidad(Request $request, $idUsuario)
+    {
+        $usuario = new Usuario;
+        $usuario = Usuario::findOrFail($idUsuario);
+        //si la accion es igual a 1 asigno la habilidad
+         //si la accion es <> a 1 desasigno la habilidad
+         //, $idHabilidad, $accion
+           
+        if($request->accion  =='1'){
+            $usuario->habilidades()->attach($request->idHabilidad);
+        }else{
+            $usuario->habilidades()->detach($request->idHabilidad);
+        }
+        return $usuario;
+    }
+
     public function updateNoPass(Request $request, $id)
     {
         $usuario = new Usuario;
