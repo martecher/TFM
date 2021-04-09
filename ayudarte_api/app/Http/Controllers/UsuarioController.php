@@ -161,7 +161,8 @@ class UsuarioController extends Controller
         }else{
             $usuario->habilidades()->detach($request->idHabilidad);
         }
-        return $usuario;
+        $usuario->save();
+        return response()->json(['status'=>'ok','data'=>$usuario],200);
     }
 
     public function updateNoPass(Request $request, $id)
@@ -169,8 +170,22 @@ class UsuarioController extends Controller
         $usuario = new Usuario;
         $usuario = Usuario::findOrFail($id);
         $usuario->update($request->all());
-        return $usuario;
+        return response()->json(['status'=>'ok','data'=>$usuario],200);
     }
+
+    
+    public function actualizarBolsa(Request $request,$idUsuario)
+    {
+        $usuario = new Usuario;
+        $usuario = Usuario::findOrFail($idUsuario);
+        if(  $request->signo=='+') {
+            $usuario->bolsaHora = (float)$usuario->bolsaHora + (float)$request->horas; 
+        }else{
+            $usuario->bolsaHora = (float)$usuario->bolsaHora - (float)$request->horas;
+        }
+        $usuario->update($request->all());
+        return response()->json(['status'=>'ok','data'=>$usuario],200);
+    }   
     /**
      * Remove the specified resource from storage.
      *
