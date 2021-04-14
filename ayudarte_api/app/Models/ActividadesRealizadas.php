@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class ActividadesRealizadas extends Model
 {
-	protected $table='actividadesRealizadas';
+	protected $table='actividades_realizadas';
     use HasFactory;
     /**
      * The attributes that are mass assignable.

@@ -13,7 +13,7 @@ class ActividadesRealizadasMigration extends Migration
      */
     public function up()
     {
-        Schema::create('actividadesRealizadas', function (Blueprint $table) {
+        Schema::create('actividades_realizadas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('observacion');
             $table->float('horasReales');

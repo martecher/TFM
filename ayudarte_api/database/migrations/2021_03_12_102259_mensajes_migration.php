@@ -16,7 +16,7 @@ class MensajesMigration extends Migration
         Schema::create('mensajes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('texto');
-            $table->integer('leido');
+            $table->boolean('leido');
             $table->integer('orden');
             $table->integer('usuarioEnvia_id')->unsigned();
             $table->integer('usuarioRecibe_id')->unsigned();

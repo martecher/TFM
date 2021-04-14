@@ -13,7 +13,7 @@ class CategoriaHabilidadMigration extends Migration
      */
     public function up()
     {
-        Schema::create('categoriasHabilidades', function (Blueprint $table) {
+        Schema::create('categorias_habilidades', function (Blueprint $table) {
             $table->increments('id');
             $table->string('descripcion');
             $table->timestamps();
