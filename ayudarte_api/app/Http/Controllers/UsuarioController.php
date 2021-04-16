@@ -173,6 +173,24 @@ class UsuarioController extends Controller
         return response()->json(['status'=>'ok','data'=>$usuario],200);
     }
 
+    public function actualizarPassword(Request $request, $id)
+    {
+        $usuario = new Usuario;
+        $usuario = Usuario::findOrFail($id);
+        //comprobamos si la contraseña actual coincide con la introducida
+        //= Hash::make($request->password);
+        $passActual = $usuario->password;
+        $passActualRecibida = Hash::make($request->passActual);
+        if( $passActual == $passActualRecibida  ){
+            $mensaje = "La contraseña introducida no coincide con la actual";
+            return response()->json(['status'=>'error','data'=>$mensaje],401);
+        }else{
+            $usuario->password = Hash::make($request->passNueva);
+            $usuario->save();
+            $mensaje = "Contraseña actualizada correctamente";
+            return response()->json(['status'=>'ok','data'=>$mensaje],200);
+        }
+    }
     
     public function actualizarBolsa(Request $request,$idUsuario)
     {

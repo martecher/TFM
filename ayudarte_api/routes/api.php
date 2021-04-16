@@ -45,6 +45,7 @@ Route::put('usuarios/updateNoPass/{id}', 'App\Http\Controllers\UsuarioController
 Route::get('rankingUsuarios', 'App\Http\Controllers\UsuarioController@ranking')->middleware( 'auth:sanctum');
 Route::put('habilidadesUsuarios/{id}', 'App\Http\Controllers\UsuarioController@asignarDesasignarHabilidad')->middleware( 'auth:sanctum');
 Route::put('actualizarBolsa/{idUsuario}', 'App\Http\Controllers\UsuarioController@actualizarBolsa')->middleware( 'auth:sanctum');
+Route::put('actualizarPassword/{idUsuario}', 'App\Http\Controllers\UsuarioController@actualizarPassword')->middleware( 'auth:sanctum');
 
 
 //  ********  Fin Rutas  de Usuarios  ******** 
