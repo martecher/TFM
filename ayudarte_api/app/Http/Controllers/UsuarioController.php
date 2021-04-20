@@ -85,6 +85,9 @@ class UsuarioController extends Controller
 
         $usuario->save();
         $usuario->createToken('usuario');
+ 
+        return response()->json(['status'=>'ok','data'=>$usuario],200);
+
     }
 
     /**
