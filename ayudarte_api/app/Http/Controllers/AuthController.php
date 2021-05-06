@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MensajeAsignacionTarea;
 
-class AuthController extends Controller
+class AuthController extends Controller 
 {
   public function login(Request $request)
   {
-
+ 
     try {
       $request->validate([
         'email' => 'email|required',
@@ -33,6 +35,11 @@ class AuthController extends Controller
 
       $user->tokens()->delete();
       $tokenResult = $user->createToken('usuario')->plainTextToken;
+
+      Mail::to('miguelangel.artecheruiz@gmail.com')->
+      queue(new MensajeAsignacionTarea);
+
+
       return response()->json([
         'status_code' => 200,
         'token_acceso' => $tokenResult,

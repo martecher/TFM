@@ -241,6 +241,8 @@ class ActividadesRealizadasController extends Controller
 
         $actividad->usuarioRealiza_id= $usuarioId;
         $actividad->save();
+        // Aqui habria que acceder al usuario solicita  y a su email
+        // para mandar email
         return $actividad;
     }
 
