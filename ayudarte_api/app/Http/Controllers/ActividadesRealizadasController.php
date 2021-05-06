@@ -10,6 +10,9 @@ use App\Models\Categoria;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MensajeAsignacionTarea;
+use App\Models\TareaMensaje;
 class ActividadesRealizadasController extends Controller
 {
     /**
@@ -243,6 +246,12 @@ class ActividadesRealizadasController extends Controller
         $actividad->save();
         // Aqui habria que acceder al usuario solicita  y a su email
         // para mandar email
+        $tareaMensaje= new TareaMensaje;
+        $tareaMensaje->descripcion =  $actividad->observacion;
+        $tareaMensaje->habilidad =  $actividad->habilidad->descripcion;
+        $tareaMensaje->usuarioRealiza =  $actividad->usuarioRealiza->nombre . ' '.$actividad->usuarioRealiza->apellido1 . ' '.$actividad->usuarioRealiza->apellido2 ;
+        
+        Mail::to($actividad->usuarioSolicita->email)->queue(new MensajeAsignacionTarea($tareaMensaje));
         return $actividad;
     }
 

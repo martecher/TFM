@@ -36,8 +36,7 @@ class AuthController extends Controller
       $user->tokens()->delete();
       $tokenResult = $user->createToken('usuario')->plainTextToken;
 
-      Mail::to('miguelangel.artecheruiz@gmail.com')->
-      queue(new MensajeAsignacionTarea);
+    //  Mail::to('miguelangel.artecheruiz@gmail.com')->queue(new MensajeAsignacionTarea);
 
 
       return response()->json([

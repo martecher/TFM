@@ -8,7 +8,8 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
 class MensajeAsignacionTarea extends Mailable
-{    public $subject = 'Su tarea solictada ha sido asiganda.';
+{   public $subject = 'Su tarea solictada ha sido asiganda.';
+    public $tarea;
     use Queueable, SerializesModels;
    
     /**
@@ -16,9 +17,10 @@ class MensajeAsignacionTarea extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    
+    public function __construct($tarea)
     {
-        //
+         $this->tarea = $tarea;
     }
 
     /**
