@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MensajeAsignacionTarea;
+use App\Mail\MensajeFinalizacionTarea;
+
 use App\Models\TareaMensaje;
 class ActividadesRealizadasController extends Controller
 {
@@ -284,6 +286,19 @@ class ActividadesRealizadasController extends Controller
 
  
         $actividad->update($request->all());
+        if($actividad->finalizada==1){
+            // aqui se podria comprobar si uno de los campos ha sido finalizada a 1
+            // entonces mandar el mail de finalizada
+            $tareaMensaje= new TareaMensaje;
+            $tareaMensaje->descripcion =  $actividad->observacion;
+            $tareaMensaje->habilidad =  $actividad->habilidad->descripcion;
+            $tareaMensaje->usuarioRealiza =  $actividad->usuarioRealiza->nombre . ' '.$actividad->usuarioRealiza->apellido1 . ' '.$actividad->usuarioRealiza->apellido2 ;
+            
+            Mail::to($actividad->usuarioSolicita->email)->queue(new MensajeFinalizacionTarea ($tareaMensaje));
+    
+
+        }
+     
         return $actividad;
     }
 
